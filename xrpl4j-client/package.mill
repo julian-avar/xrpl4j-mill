@@ -1,0 +1,38 @@
+package build
+package `xrpl4j-client`
+
+import mill.javalib.*
+import mill.javalib.publish.*
+import millbuild.*
+
+object `package` extends Xrpl4jBaseModule:
+    override def scalaVersion = "3.7.4"
+
+    override def artifactName     = "xrpl4j-client"
+    override def pomParentProject = Some(Artifact("org.xrpl", "xrpl4j-parent", "HEAD-SNAPSHOT"))
+    override def pomSettings      = PomSettings("", "", "", Seq(), VersionControl(), Seq())
+
+    override def compileMvnDeps = super.compileMvnDeps() ++ Seq(Deps.value)
+    override def moduleDeps     = super.moduleDeps ++ Seq(build.`xrpl4j-core`)
+    override def mvnDeps        = super.mvnDeps() ++ Seq(
+      Deps.jacksonAnnotations,
+      Deps.jacksonCore,
+      Deps.jacksonDatabind,
+      Deps.guava,
+      Deps.okhttp,
+      Deps.feignCore,
+      Deps.feignJackson,
+      Deps.slf4jApi,
+      Deps.logbackClassic
+    )
+
+    object test extends MavenTests with TestModule.Junit5:
+        override def forkWorkingDir        = moduleDir
+        override def testParallelism       = false
+        override def testSandboxWorkingDir = false
+        override def compileMvnDeps        = super.compileMvnDeps() ++ Seq(Deps.value)
+        override def runMvnDeps            = super.runMvnDeps() ++ Seq(Deps.value)
+        override def mvnDeps               = super.mvnDeps() ++
+            Seq(Deps.assertjCore, Deps.mockitoCore, Deps.junitJupiterApi, Deps.junitJupiterEngine)
+    end test
+end `package`

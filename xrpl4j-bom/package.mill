@@ -1,0 +1,15 @@
+package build
+package `xrpl4j-bom`
+
+import mill.javalib.*
+import mill.javalib.publish.*
+import millbuild.*
+
+object `package` extends Xrpl4jBaseModule, BomModule:
+    override def artifactName     = "xrpl4j-bom"
+    override def pomParentProject = Some(Artifact("org.xrpl", "xrpl4j-parent", "HEAD-SNAPSHOT"))
+    override def pomSettings      =
+        PomSettings("A Bill of Materials (BOM) for easier dependency reliance.", "", "", Seq(), VersionControl(), Seq())
+
+    override def moduleDeps = Seq(build.`xrpl4j-core`, build.`xrpl4j-client`)
+end `package`

@@ -1,0 +1,28 @@
+//| mill-version: 1.1.0-RC3
+package build
+
+import mill.javalib.*
+import mill.javalib.publish.*
+import millbuild.*
+
+object `package` extends Xrpl4jBaseModule:
+    override def artifactName     = "xrpl4j-parent"
+    override def pomPackagingType = "pom"
+    override def pomSettings      = PomSettings(
+      description = "Parent project for xrpl4j modules.",
+      organization = "org.xrpl",
+      url = "https://github.com/XRPLF/xrpl4j",
+      licenses = Seq(License.`Apache-2.0`),
+      versionControl = VersionControl(
+        Some("scm:git:git@github.com:XRPLF/xrpl4j.git"),
+        Some("scm:git:git://github.com/XRPLF/xrpl4j.git"),
+        Some("HEAD")
+      ),
+      developers = Seq(
+        Developer(name = "David Fuelling", url = "https://github.com/sappenin"),
+        Developer(name = "Neil Hartner", url = "https://github.com/nhartner"),
+        Developer(name = "Noah Kramer", url = "https://github.com/nkramer44"),
+        Developer(name = "Ian Simpson", url = "https://github.com/theotherian")
+      )
+    )
+end `package`

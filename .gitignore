@@ -235,3 +235,17 @@ Temporary Items
 .settings/org.eclipse.jdt.apt.core.prefs
 .settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.m2e.core.prefs
+.vscode/
+
+### Mill ###
+# Build output
+out/
+
+### Scala ###
+# Metals (Scala language server)
+.metals/
+.bloop/
+project/metals.sbt
+
+# BSP (Build Server Protocol)
+.bsp/
